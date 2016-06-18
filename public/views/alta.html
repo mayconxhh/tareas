@@ -1,0 +1,40 @@
+<div>
+	<form ng-submit="agregar()">
+		<h3>Agregar una  nueva tarea</h3>
+		<div class="has-feedback">
+			<input type="text" class="form-control" placeholder="Tarea a realizar" ng-model="tarea.nombre" required="require">
+			<span class="glyphicon glyphicon-tasks form-control-feedback"></span>
+		</div>
+		<div>
+			<span class="glyphicon glyphicon-time"></span>&nbsp;<span>Elige la prioridad:</span>
+			<label class="radio-inline">
+				<input type="radio" ng-model="tarea.prioridad" value="0"> Baja
+			</label>
+			<label class="radio-inline">
+				<input type="radio" ng-model="tarea.prioridad" value="1"> Normal
+			</label>
+			<label class="radio-inline">
+				<input type="radio" ng-model="tarea.prioridad" value="2"> Alta
+			</label>
+		</div>
+		<button type="submit" class="btn btn-success">Agregar</button>
+	</form>
+	<div class="bg-info">
+		<h4>Tareas registradas</h4>
+		<div class="item" ng-repeat="tarea in tareas | orderBy: '-prioridad'">
+			<span ng-hide="tarea.prioridad==2" ng-click="masPrioridad(tarea)" class="glyphicon glyphicon-circle-arrow-up">
+			</span>
+			<span ng-hide="tarea.prioridad==0" ng-click="menosPrioridad(tarea)" class="glyphicon glyphicon-circle-arrow-down"></span>
+			 Prioridad: {{ prioridades[tarea.prioridad] }} |
+			<span>
+				<a href="#">{{ tarea.nombre }}</a>
+				<a>
+					<span class="glyphicon glyphicon-edit text-warning" ng-click="editarTarea(tarea)"></span>
+				</a>
+				<a>
+					<span class="glyphicon glyphicon-remove text-danger" ng-click="eliminar(tarea)"></span>
+				</a>
+			</span>
+		</div>
+	</div>
+</div>
